@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <title>Rock Paper</title>
+    <meta charset="UTF-8" />
+    <style>
+        .body{
+            background-color: beige;
+            background-image: linear-gradient(to right, rgba(255,255,255, 0.9) 0 100%),url(https://purepng.com/public/uploads/medium/purepng.com-pokeballpokeballdevicepokemon-ballpokemon-capture-ball-17015278258617dhmi.png);
+            background-size: 200px 200px;
+        }
+        .h1text{
+            text-align: center;
+            text-decoration: wavy;
+            font-family: cursive;
+            color: blueviolet;
+        }
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 60%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+        </style>
+
+
+   
+</head>
+<body class="body" >
+    
+    <h1 class="h1text">ROCK PAPER SCISSOR</h1>
+    <div class="container">
+        <div class="center">
+
+            <input type="image" value="rock" style="height:100px;width:100px;border: 2px solid black" src=C:\Users\Ps235\Downloads\geomage.jpeg ></input>
+            <br ></br>
+            <input type="image" value="scissors" style="height:100px;width:100px;border: 2px solid red ;" src=C:\Users\Ps235\Downloads\scisor.png></input>
+            <br ></br>
+            <input type="image" value="paper" style="height:100px;width:100px;border: 2px solid rgb(188, 248, 8);" src="C:\Users\Ps235\Downloads\pikapaper.jpg"></input>
+            
+        </div>
+
+  
+  <div id="result"style="text-align:center;font-family:cursive;color:red"></div>
+  <script>
+    let playerScore = 0
+    let computerScore = 0
+    const buttons = document.querySelectorAll('input')
+
+    function computerPlay() {
+        let choices = ['rock', 'paper', 'scissors']
+        return choices[Math.floor(Math.random() * choices.length)]
+    }
+
+    function disableButtons() {
+        buttons.forEach(elem => {
+            elem.disabled = true
+        })
+    }
+
+    function playRound(playerSelection) {
+        let computerSelection = computerPlay()
+        let result = ""
+
+        if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
+            (playerSelection == 'scissors' && computerSelection == 'paper') ||
+            (playerSelection == 'paper' && computerSelection == 'rock')) {
+        
+            playerScore += 1
+            result = ('You win! ' + playerSelection + ' beats ' + computerSelection
+                + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore)
+            
+
+            if (playerScore == 5) {
+                result += '<br><br>You won the game! Reload the page to play again'
+                
+                disableButtons()
+            }
+        }
+        else if (playerSelection == computerSelection) {
+            result = ('It\'s a tie. You both chose ' + playerSelection
+                + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore)
+            
+        }
+        else {
+            computerScore += 1
+            result = ('You lose! ' + computerSelection + ' beats ' + playerSelection
+                + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore)
+            
+
+            if (computerScore == 5) {
+                result += '<br><br>I won the game'
+                disableButtons()
+            }
+        }
+
+        document.getElementById('result').innerHTML=result;
+        return
+    }
+
+    buttons.forEach(button =>{
+        button.addEventListener('click', function(){
+            playRound(button.value)
+        })
+    })
+
+  </script>
+</body>
+</html>
